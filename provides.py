@@ -11,11 +11,11 @@ from charms.reactive import scopes
 class NrpeExternalMasterProvides(RelationBase):
     scope = scopes.GLOBAL
 
-    @hook('{provides:nrpe-external-master}-relation-{joined,changed}')
+    @hook('{provides:nrpe}-relation-{joined,changed}')
     def changed_nrpe(self):
         self.set_state('{relation_name}.available')
 
-    @hook('{provides:nrpe-external-master}-relation-{broken,departed}')
+    @hook('{provides:nrpe}-relation-{broken,departed}')
     def broken_nrpe(self):
         self.remove_state('{relation_name}.available')
 

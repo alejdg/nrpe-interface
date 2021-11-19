@@ -1,17 +1,17 @@
-# nrpe-external-master interface
+# nrpe interface
 
 Use this interface to register nagios checks in your charm layers.
 
 ## Purpose
 
 This interface is designed to interoperate with the
-[nrpe-external-master](https://jujucharms.com/nrpe-external-master) subordinate charm.
+[nrpe](https://charmhub.io/nrpe) subordinate charm.
 
 ## How to use in your layers
 
-The event handler for `nrpe-external-master.available` is called with an object
+The event handler for `nrpe.available` is called with an object
 through which you can register your own custom nagios checks, when a relation
-is established with `nrpe-external-master:nrpe-external-master`.
+is established with `nrpe:nrpe`.
 
 This object provides a method,
 
@@ -34,7 +34,7 @@ All arguments are required.
 The nrpe subordinate installs `check_http`, so you can use it like this:
 
 ```
-@when('nrpe-external-master.available')
+@when('nrpe.available')
 def setup_nagios(nagios):
     config = hookenv.config()
     unit_name = hookenv.local_unit()
@@ -57,8 +57,8 @@ or [find one](https://www.nagios.org/projects/nagios-plugins/) that does what yo
 
 ```
 $ juju deploy your-awesome-charm
-$ juju deploy nrpe-external-master --config site-nagios.yaml
-$ juju add-relation your-awesome-charm nrpe-external-master
+$ juju deploy nrpe --config site-nagios.yaml
+$ juju add-relation your-awesome-charm nrpe
 ```
 
 where `site-nagios.yaml` has the necessary configuration settings for the
